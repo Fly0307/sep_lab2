@@ -13,7 +13,7 @@ Buffer::Buffer() {
 
 Buffer::~Buffer() {
     ListNode *tmp;
-    while (head->next){
+    while (head){
         tmp=head->next;
         head=head->next->next;
         delete tmp;
@@ -40,10 +40,10 @@ void Buffer::writeToFile(const string &filename) const {
 }
 
 void Buffer::showLines(int from, int to) {
-    if(from<0) {
-        /*throw "Line number out of range";*/
-        std::cout<<"？ Bad/Unknown command"<<std::endl;
-        return;
+    if(from<0||to>maxLineNum) {
+        throw "Line number out of range";
+        /*std::cout<<"? Bad/Unknown command"<<std::endl;
+        return;*/
     }
     ListNode* tmp=head;
     for(int i=0;i<from;++i){
@@ -58,22 +58,21 @@ void Buffer::showLines(int from, int to) {
 }
 
 void Buffer::deleteLines(int from, int to){
-    if(from<0||to>=maxLineNum||from>to) {
-        /*throw "Line number out of range";*/
-        std::cout<<"？ Bad/Unknown command"<<std::endl;
-        return;
+    if(from<0||to>maxLineNum||from>to) {
+        throw "Delete range error";
     }
-    ListNode *tmp;
-    for(int i=0;i<from;++i){
+    ListNode *tmp=head;
+    for(int i=1;i<from;++i){
         tmp=tmp->next;
     }
-    ListNode *tmp_2;
-    for(int i=from;i<to;++i){
-        tmp_2=tmp->next;
+    ListNode *tmp_1,*tmp_2=tmp;
+    tmp=tmp->next;
+    for(int i=from;i<=to;++i){
+        tmp_1=tmp->next;
         delete tmp;
-        tmp=tmp_2;
+        tmp=tmp_1;
     }
-    /*tmp->next=tmp_2;*/
+    tmp_2->next=tmp_1;
     if(from==1){
         this->currentLineNum=0;
     }else {
@@ -105,9 +104,12 @@ void Buffer::appendLine(const string &text){
 }
 
 const string &Buffer::moveToLine(int idx){/*返回string*/
+    if(idx>maxLineNum)
+        throw "Line number out of range";
     ListNode *tmp=head;
     for(int i=0;i<idx;++i){
         tmp=tmp->next;
     }
+    currentLineNum=idx;
     return tmp->value;
 }

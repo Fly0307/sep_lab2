@@ -60,9 +60,11 @@ void Editor::cmdInsert()
         if (text == ".")
             break;
         if (firstLine) {
+            /*std::cout<<buffer->currentLineNum<<std::endl;*/
             buffer->insertLine(text);
             firstLine = false;
         }  else {
+           /* std::cout<<buffer->currentLineNum<<std::endl;*/
             buffer->appendLine(text);
         }
     }
