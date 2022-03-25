@@ -9,7 +9,7 @@ using std::string;
 struct ListNode {
     string value;
     ListNode *next;
-    ListNode():value(" "),next(nullptr){};
+    ListNode():value(""),next(nullptr){};
     ListNode(const string &v, ListNode *n):value(v), next(n){}
 };
 /*向head_p后面添加以新的node节点，值为val*/

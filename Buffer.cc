@@ -30,9 +30,10 @@ void Buffer::writeToFile(const string &filename) const {
         std::cout<<"can not open this file"<<std::endl;
         return;
     }
+    tmp=tmp->next;
     while (tmp){
-        file<<tmp->next->value<<'\n';
-        length+=tmp->next->value.length()+1;
+        file<<tmp->value<<'\n';
+        length+=tmp->value.length()+1;
         tmp=tmp->next;
     }
     file.close();
