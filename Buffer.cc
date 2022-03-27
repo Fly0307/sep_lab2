@@ -41,6 +41,10 @@ void Buffer::writeToFile(const string &filename) const {
 }
 
 void Buffer::showLines(int from, int to) {
+    if(from>to){
+        throw "Number range error";
+    }
+
     if(from<0||to>maxLineNum) {
         throw "Line number out of range";
         /*std::cout<<"? Bad/Unknown command"<<std::endl;
@@ -59,8 +63,11 @@ void Buffer::showLines(int from, int to) {
 }
 
 void Buffer::deleteLines(int from, int to){
-    if(from<0||to>maxLineNum||from>to) {
+    if(from>to){
         throw "Delete range error";
+    }
+    if(from<0||to>maxLineNum) {
+        throw "Line number out of range";
     }
     ListNode *tmp=head;
     for(int i=1;i<from;++i){

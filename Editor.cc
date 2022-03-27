@@ -110,8 +110,9 @@ void Editor::dispatchCmd(const string &cmd)
     if (cmd=="1,$n")
     {
         if(!buffer->maxLineNum){
-            std::cout<<"Text is empty"<<std::endl;
-            return;
+            throw "Number range error";
+            /*std::cout<<"Text is empty"<<std::endl;
+            return;*/
         }
             /*throw "Text is empty";*/
         cmdNumber(1,buffer->maxLineNum);
@@ -128,6 +129,9 @@ void Editor::dispatchCmd(const string &cmd)
     }
     ss >> comma >> end >> type;
     if (ss.good()) {
+       /* if(start>end){
+            throw "Number range error";
+        }*/
         if (type == 'n') {
             cmdNumber(start, end);
             return;
