@@ -36,6 +36,7 @@ void Buffer::writeToFile(const string &filename) const {
         length+=tmp->value.length()+1;/*结尾换行符*/
         tmp=tmp->next;
     }
+    file.seekg (0, std::ios::end);
     file.close();
     std::cout<<length<<" byte(s) written"<<std::endl;
 }
@@ -71,7 +72,7 @@ void Buffer::deleteLines(int from, int to){
         throw "Line number out of range";
     }
     ListNode *tmp=head;
-    for(int i=1;i<from;++i){
+    for(int i=0;i<from-1;++i){
         tmp=tmp->next;
     }
     ListNode *tmp_1,*tmp_2=tmp;
@@ -86,7 +87,7 @@ void Buffer::deleteLines(int from, int to){
         this->currentLineNum=1;/*由0改为1*/
         //printf("currentLine: %d\n",this->currentLineNum);
     }else {
-        this->currentLineNum = from - 1;          /*删除最后一行后的新地址*/
+        this->currentLineNum = from;          /*删除最后一行后的新地址*/
         //printf("currentLine:%d\n",this->currentLineNum);
     }
     this->maxLineNum-=(to-from+1);/*重置最大行*/

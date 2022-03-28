@@ -23,12 +23,13 @@ struct ListNode {
 
 class Buffer {
 private:
-    int currentLineNum{};
+    /*int currentLineNum{};*/
     // TO DO: add a List here for storing the input lines
     ListNode* head;
 
 public:
     int maxLineNum{};
+    int currentLineNum{};
     Buffer();
     ~Buffer();
 

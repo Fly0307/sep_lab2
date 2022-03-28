@@ -4,7 +4,6 @@
 class Editor {
 private:
   Buffer *buffer;
-  int currentLine;
 
   void dispatchCmd(const string &cmd);
   void cmdAppend();

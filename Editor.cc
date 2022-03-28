@@ -20,6 +20,7 @@ void Editor::run()
     while (true)
     {
         cout << "cmd> ";
+        cout <<buffer->currentLineNum<<":";
         cout.flush();
         getline(cin, cmd);
         if (cmd == "Q")
@@ -115,7 +116,7 @@ void Editor::dispatchCmd(const string &cmd)
             return;*/
         }
             /*throw "Text is empty";*/
-            buffer->print_list();//打印测试
+            //buffer->print_list();//打印测试
         cmdNumber(1,buffer->maxLineNum);
         return;
     }
