@@ -90,6 +90,10 @@ void Buffer::deleteLines(int from, int to){
         this->currentLineNum = from;          /*删除最后一行后的新地址*/
         //printf("currentLine:%d\n",this->currentLineNum);
     }
+    if(to==maxLineNum)
+    {
+        this->currentLineNum=from-1;
+    }
     this->maxLineNum-=(to-from+1);/*重置最大行*/
     //printf("max:%d\n",this->maxLineNum);
 }
