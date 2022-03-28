@@ -18,12 +18,7 @@ struct ListNode {
     *head_p = t;
 }*/
 /*node顺序打印到结尾*/
-/*void print_list(ListNode* node){
-    while (node){
-        std::cout<<node->value<<std::endl;
-        node=node->next;
-    }
-}*/
+
 
 
 class Buffer {
@@ -46,4 +41,14 @@ public:
     void deleteLines(int from, int to);
     void insertLine(const string &text);
     void appendLine(const string &text);
+    void print_list(){
+        std::cout<<"M:"<<maxLineNum<<std::endl;
+        std::cout<<"C:"<<currentLineNum<<std::endl;
+        ListNode *tmp=head;
+        while (tmp){
+            std::cout<<tmp->value<<std::endl;
+            tmp=tmp->next;
+        }
+        return;
+    }
 };

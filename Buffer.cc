@@ -14,8 +14,8 @@ Buffer::Buffer() {
 Buffer::~Buffer() {
     ListNode *tmp;
     while (head){
-        tmp=head->next;
-        head=head->next->next;
+        tmp=head;
+        head=head->next;
         delete tmp;
     }
 }
@@ -33,7 +33,7 @@ void Buffer::writeToFile(const string &filename) const {
     tmp=tmp->next;
     while (tmp){
         file<<tmp->value<<'\n';
-        length+=tmp->value.length()+1;
+        length+=tmp->value.length()+1;/*结尾换行符*/
         tmp=tmp->next;
     }
     file.close();
@@ -54,6 +54,7 @@ void Buffer::showLines(int from, int to) {
     for(int i=0;i<from;++i){
         tmp=tmp->next;
     }
+
     for(from; from <= to; from++){
         std::cout<<from<<"\t"<<tmp->value<<std::endl;
         tmp=tmp->next;
@@ -82,11 +83,14 @@ void Buffer::deleteLines(int from, int to){
     }
     tmp_2->next=tmp_1;
     if(from==1){
-        this->currentLineNum=0;
+        this->currentLineNum=1;/*由0改为1*/
+        //printf("currentLine: %d\n",this->currentLineNum);
     }else {
         this->currentLineNum = from - 1;          /*删除最后一行后的新地址*/
+        //printf("currentLine:%d\n",this->currentLineNum);
     }
     this->maxLineNum-=(to-from+1);/*重置最大行*/
+    //printf("max:%d\n",this->maxLineNum);
 }
 /*插入1行,将指定文本插入到当前行之前。*/
 void Buffer::insertLine(const string &text){
@@ -98,6 +102,7 @@ void Buffer::insertLine(const string &text){
     }
     tmp->next=new ListNode(text,tmp->next);
     maxLineNum++;
+    //printf("maxLineNuw:%d",this->maxLineNum);
 
 }
 /*追加1行,将指定文本插入到当前行之后*/

@@ -115,6 +115,7 @@ void Editor::dispatchCmd(const string &cmd)
             return;*/
         }
             /*throw "Text is empty";*/
+            buffer->print_list();//打印测试
         cmdNumber(1,buffer->maxLineNum);
         return;
     }
